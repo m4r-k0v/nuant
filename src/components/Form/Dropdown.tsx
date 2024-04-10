@@ -1,5 +1,5 @@
 type DropdownProps = {
-  options: string[];
+  options: { name: string; url: string }[];
   value: string;
   onChange: (value: string) => void;
 };
@@ -12,7 +12,9 @@ const Dropdown = ({ options, value, onChange }: DropdownProps) => {
       onChange={(e) => onChange(e.target.value)}
     >
       {options.map((option) => (
-        <option key={option}>{option}</option>
+        <option key={option?.name} value={option?.url}>
+          {option?.name}
+        </option>
       ))}
     </select>
   );

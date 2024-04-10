@@ -1,19 +1,40 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { getListPokemons } from 'services/pokemonService';
 
-export const useGetListPokemons = (offset = 0, limit = 100) => {
+export const useGetListPokemons = (selectedTypeUrl: string, offset = 0, limit = 100) => {
   const {
-    data: pokemons,
-    isLoading: isLoadingPoekmons,
+    data,
+    isLoading: isLoadingPokemons,
     isError: isErrorPokemons,
-  } = useQuery({
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
+  } = useInfiniteQuery({
+    enabled: !selectedTypeUrl,
+    queryFn: getListPokemons,
     queryKey: ['pokemons', offset, limit],
-    queryFn: () => getListPokemons(offset, limit),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      if (lastPage?.next === null) return undefined;
+
+      const url = new URL(lastPage?.next ?? '');
+      const params = new URLSearchParams(url.search);
+      return Number(params.get('offset'));
+    },
   });
 
   return {
-    pokemons,
-    isLoadingPoekmons,
+    pokemons: data?.pages,
+    isLoadingPokemons,
     isErrorPokemons,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
   };
 };

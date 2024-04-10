@@ -8,6 +8,7 @@ export default defineConfig({
       components: '/src/components',
       hooks: '/src/hooks',
       services: '/src/services',
+      utils: '/src/utils',
     },
   },
 });

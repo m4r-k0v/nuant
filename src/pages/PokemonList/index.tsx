@@ -1,39 +1,40 @@
 import { useState } from 'react';
-import Card from 'components/Card';
 import { FilterBar } from 'components/FilterBar';
-import { useGetListPokemons } from 'hooks/query/useGetListPokemons';
-import { useGetPokemonTypes } from 'hooks/query/useGetPokemonTypes';
-import { useGetPokemonByName } from 'hooks/query/useGetPokemonByName';
+import { useDebounce } from 'utils/hooks';
+import CardWrapper from 'components/CardWrapper';
+import LoadMoreBtn from 'components/LoadMoreBtn';
+import { usePokemons } from 'hooks/usePokemons';
 
 const Pokedex = () => {
-  const [selectedType, setSelectedType] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [selectedType, setSelectedType] = useState<string>('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 900);
 
-  const { pokemons, isErrorPokemons, isLoadingPoekmons } = useGetListPokemons();
-  const { pokemonTypes, isLoadingTypes, isErrorTypes } = useGetPokemonTypes();
-
-  const { pokemonByName, isLoadingPokemonByName, isErrorPokemonByName } = useGetPokemonByName(searchTerm);
-
-  if (isLoadingPoekmons || isLoadingTypes || isLoadingPokemonByName) return <div>Loading...</div>;
-  if (isErrorPokemons || isErrorTypes || isErrorPokemonByName) return <div>An error occurred</div>;
+  const { infiniteQuery, pokemons, pokemonTypes, isLoading } = usePokemons({
+    selectedType,
+    debouncedSearchTerm,
+  });
 
   return (
     <div className='flex items-center justify-center bg-gray-100 p-4'>
       <div className='flex w-[1000px] flex-col rounded-lg bg-white p-6 shadow-xl'>
-        <h1 className='mb-6 text-center text-3xl font-bold'>Pokédex</h1>
+        <h1 className='mb-6 text-center text-3xl font-bold text-emerald-600'>Pokédex</h1>
         <FilterBar
           pokemonTypes={pokemonTypes ?? []}
           selectedType={selectedType}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+          setSelectedType={setSelectedType}
         />
-        <div className='max-h-[calc(100vh-200px)] overflow-auto'>
-          <div className='grid grid-cols-6 gap-4'>
-            {pokemons.map((pokemon) => (
-              <Card name={pokemon.name} key={pokemon.name} link={pokemon.url} />
-            ))}
-          </div>
-        </div>
+        <CardWrapper isLoading={isLoading} pokemons={pokemons} />
+        {(!selectedType || !searchTerm) && (
+          <LoadMoreBtn
+            fetchNextPage={infiniteQuery.fetchNextPage}
+            hasNextPage={infiniteQuery.hasNextPage}
+            isFetchingNextPage={infiniteQuery.isFetchingNextPage}
+            isFetching={infiniteQuery.isFetching}
+          />
+        )}
       </div>
     </div>
   );
