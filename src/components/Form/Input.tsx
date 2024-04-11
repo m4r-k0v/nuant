@@ -11,7 +11,7 @@ const Input = ({ placeholder, type = 'text', ...props }: InputProps) => {
       type={type}
       value={props.value}
       onChange={(e) => props.callback(e.target.value)}
-      className='mb-4 w-full rounded border border-gray-300 p-2'
+      className='mb-4 w-full rounded-lg border border-gray-300 p-3 text-lg placeholder-gray-500'
       placeholder={placeholder}
     />
   );

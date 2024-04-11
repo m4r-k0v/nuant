@@ -1,18 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
 import { getPokemonByType } from 'services/pokemonService';
-import { Pokemon } from 'pokenode-ts';
 
-export const useGetPokemonByType = (selectedTypeUrl: string) => {
+export const useGetPokemonByType = (selectedType?: string) => {
   const {
     data: pokemonsByType,
     isLoading: isLoadingPokemonsByType,
     isError: isErrorPokemonsByType,
   } = useQuery({
-    enabled: !!selectedTypeUrl,
-    queryKey: ['pokemons-by-type', selectedTypeUrl],
-    queryFn: () => getPokemonByType(selectedTypeUrl),
+    enabled: !!selectedType,
+    queryKey: ['pokemons-by-type', selectedType],
+    queryFn: () => getPokemonByType(selectedType),
     select: (data) => {
-      return data?.map(({ pokemon }: { pokemon: Pokemon }) => ({
+      return data?.map(({ pokemon }) => ({
         name: pokemon.name,
         url: pokemon.url,
       }));

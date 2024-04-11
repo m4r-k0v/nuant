@@ -1,7 +1,11 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getListPokemons } from 'services/pokemonService';
 
-export const useGetListPokemons = (selectedTypeUrl: string, offset = 0, limit = 100) => {
+export const useGetListPokemons = (
+  selectedTypeUrl?: string,
+  offset = 0,
+  limit = 100
+) => {
   const {
     data,
     isLoading: isLoadingPokemons,

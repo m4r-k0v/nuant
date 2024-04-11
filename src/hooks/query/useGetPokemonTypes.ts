@@ -7,6 +7,7 @@ export const useGetPokemonTypes = () => {
     isLoading: isLoadingTypes,
     isError: isErrorTypes,
   } = useQuery({
+    enabled: true,
     queryKey: ['pokemon-types'],
     queryFn: getTypes,
   });

@@ -19,8 +19,17 @@ export const FilterBar = ({
 }: FilterBarProps) => {
   return (
     <div className='mb-4'>
-      <Input type='search' placeholder='Search by name' value={searchTerm} callback={setSearchTerm} />
-      <Dropdown options={pokemonTypes} value={selectedType} onChange={setSelectedType} />
+      <Input
+        type='search'
+        placeholder='Search by name'
+        value={searchTerm}
+        callback={setSearchTerm}
+      />
+      <Dropdown
+        options={pokemonTypes}
+        value={selectedType}
+        onChange={setSelectedType}
+      />
     </div>
   );
 };
