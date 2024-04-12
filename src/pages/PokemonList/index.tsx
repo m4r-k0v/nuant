@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { FilterBar } from 'components/FilterBar';
 import { useDebounce } from 'utils/hooks';
+import { useSearchParams } from 'react-router-dom';
 import CardWrapper from 'components/CardWrapper';
 import LoadMoreBtn from 'components/LoadMoreBtn';
+import Title from 'components/Title';
+import Layout from 'components/Layout';
 import { usePokemonList } from 'hooks/usePokemonList';
-import Title from '../../components/Title';
-import Layout from '../../components/Layout';
-import { useSearchParams } from 'react-router-dom';
+import { FilterBar } from './components/FilterBar';
 
 const Pokedex = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -41,7 +41,7 @@ const Pokedex = () => {
         resetCallback={() => {
           setSelectedType('');
           setSearchTerm('');
-          setSearchParams({ type: '' });
+          setSearchParams();
         }}
       />
 

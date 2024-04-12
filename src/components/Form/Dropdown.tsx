@@ -11,8 +11,12 @@ const Dropdown = ({ options, value, onChange }: DropdownProps) => {
       value={value}
       onChange={(e) => onChange(e.target.value)}
     >
+      <option value='' disabled={value !== ''}>
+        {value ? '' : 'Please select an option'}
+      </option>
+
       {options.map((option) => (
-        <option key={option?.name} value={option?.value ?? option?.name}>
+        <option key={option?.name} value={option?.value}>
           {option?.name}
         </option>
       ))}

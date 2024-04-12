@@ -4,10 +4,10 @@ import Title from 'components/Title';
 import { useGetDynamicData } from 'hooks/query/useGetDynamicData';
 import { useGetPokemonByName } from 'hooks/query/useGetPokemonByName';
 import Loader from 'components/Loader';
-import ProfileImage from 'components/Pokemon/ProfileImage';
-import StatItem from 'components/Pokemon/StatItem';
-import Pill from 'components/Pokemon/Pill';
-import Section from 'components/Pokemon/Section';
+import ProfileImage from './components/Pokemon/ProfileImage';
+import StatItem from './components/Pokemon/StatItem';
+import Pill from './components/Pokemon/Pill';
+import Section from './components/Pokemon/Section';
 
 const PokemonDetails = () => {
   const navigate = useNavigate();
@@ -39,7 +39,12 @@ const PokemonDetails = () => {
   return (
     <Layout>
       <Title title='Pokédex' />
-      <button onClick={() => navigate(-1)}>Back</button>
+      <p
+        className='mb-4 cursor-pointer text-gray-800 underline hover:text-gray-600 hover:no-underline'
+        onClick={() => navigate(-1)}
+      >
+        {'< Back to List'}
+      </p>
       <div>
         {isLoadingPokemonByName ? (
           <Loader />

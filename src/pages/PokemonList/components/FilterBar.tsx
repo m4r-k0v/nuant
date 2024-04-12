@@ -1,5 +1,5 @@
-import Input from './Form/Input';
-import Dropdown from './Form/Dropdown';
+import Input from 'components/Form/Input';
+import Dropdown from 'components/Form/Dropdown';
 
 type FilterBarProps = {
   searchTerm: string;
@@ -20,7 +20,7 @@ export const FilterBar = ({
 }: FilterBarProps) => {
   return (
     <>
-      <div className='mb-4 flex gap-4'>
+      <div className='flex gap-x-4'>
         <Input
           type='search'
           placeholder='Search by name'
@@ -33,12 +33,12 @@ export const FilterBar = ({
           onChange={setSelectedType}
         />
       </div>
-      <button
-        className='cursor-pointer text-gray-800 underline hover:text-gray-600 hover:no-underline'
+      <p
+        className='mb-4 cursor-pointer text-gray-800 underline hover:text-gray-600 hover:no-underline'
         onClick={resetCallback}
       >
         Clear filters
-      </button>
+      </p>
     </>
   );
 };
