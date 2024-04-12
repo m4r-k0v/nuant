@@ -1,5 +1,6 @@
 import Input from 'components/Form/Input';
 import Dropdown from 'components/Form/Dropdown';
+import Linktext from '../../../components/Linktext';
 
 type FilterBarProps = {
   searchTerm: string;
@@ -33,12 +34,7 @@ export const FilterBar = ({
           onChange={setSelectedType}
         />
       </div>
-      <p
-        className='mb-4 cursor-pointer text-gray-800 underline hover:text-gray-600 hover:no-underline'
-        onClick={resetCallback}
-      >
-        Clear filters
-      </p>
+      <Linktext text={'Clear filters'} callback={resetCallback} />
     </>
   );
 };

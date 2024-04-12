@@ -4,10 +4,11 @@ import Title from 'components/Title';
 import { useGetDynamicData } from 'hooks/query/useGetDynamicData';
 import { useGetPokemonByName } from 'hooks/query/useGetPokemonByName';
 import Loader from 'components/Loader';
-import ProfileImage from './components/Pokemon/ProfileImage';
+import Linktext from 'components/Linktext';
 import StatItem from './components/Pokemon/StatItem';
 import Pill from './components/Pokemon/Pill';
 import Section from './components/Pokemon/Section';
+import BasicInfo from './components/BasicInfo';
 
 const PokemonDetails = () => {
   const navigate = useNavigate();
@@ -39,54 +40,20 @@ const PokemonDetails = () => {
   return (
     <Layout>
       <Title title='Pokédex' />
-      <p
-        className='mb-4 cursor-pointer text-gray-800 underline hover:text-gray-600 hover:no-underline'
-        onClick={() => navigate(-1)}
-      >
-        {'< Back to List'}
-      </p>
+      <Linktext text={'< Back to List'} callback={() => navigate(-1)} />
       <div>
         {isLoadingPokemonByName ? (
           <Loader />
         ) : (
           pokemonByName && (
             <div>
-              <Section title='Basic Information'>
-                <div className='flex flex-col items-center justify-around md:flex-row md:items-start'>
-                  <ProfileImage pokemon={pokemonByName} />
-                  <p className='mt-4 text-center md:mt-0 md:w-1/3 md:text-left'>
-                    {!isLoading &&
-                      speciesInfo?.flavor_text_entries[0].flavor_text}
-                  </p>
-                  <div className='mt-4 w-full rounded-2xl p-4 shadow-lg md:mt-0 md:w-1/3'>
-                    <StatItem title='Name' description={pokemonByName?.name} />
-                    <StatItem
-                      title='Abilities'
-                      description={pokemonByName?.abilities
-                        .map((ability) => ability.ability.name)
-                        .join(', ')}
-                    />
-                    <StatItem
-                      title='Capture Rate'
-                      description={speciesInfo?.capture_rate}
-                    />
-                    <StatItem
-                      title='Base Experience'
-                      description={pokemonByName?.base_experience}
-                    />
-                    <StatItem
-                      title='Height'
-                      description={pokemonByName?.height}
-                    />
-                    <StatItem
-                      title='Weight'
-                      description={`${pokemonByName?.weight} lbs`}
-                    />
-                  </div>
-                </div>
-              </Section>
+              <BasicInfo
+                speciesInfo={speciesInfo}
+                pokemonByName={pokemonByName}
+                isLoading={isLoading}
+              />
               <Section title='Types'>{mappedTypes}</Section>
-              <Section title='Stats'>{mappedStats}</Section>
+              <Section title='BasicInfo'>{mappedStats}</Section>
             </div>
           )
         )}

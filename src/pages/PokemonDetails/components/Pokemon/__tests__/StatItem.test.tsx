@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import StatItem from 'components/Pokemon/StatItem';
+import StatItem from 'pages/PokemonDetails/components/Pokemon/StatItem';
 
 describe('<StatItem />', () => {
   it('renders the title and description correctly', () => {

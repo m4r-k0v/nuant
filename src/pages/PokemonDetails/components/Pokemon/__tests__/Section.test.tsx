@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import Section from 'components/Pokemon/Section';
+import Section from 'pages/PokemonDetails/components/Pokemon/Section';
 
 describe('<Section />', () => {
   it('renders the title and children correctly', () => {

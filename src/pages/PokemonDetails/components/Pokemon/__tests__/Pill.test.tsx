@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import Pill from 'components/Pokemon/Pill';
+import Pill from 'pages/PokemonDetails/components/Pokemon/Pill';
 
 describe('<Pill />', () => {
   it('renders the children correctly', () => {
