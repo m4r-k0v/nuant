@@ -5,8 +5,8 @@ const api = new PokemonClient();
 
 export const getListPokemons = async ({ pageParam = 0 }) => {
   try {
-    const response = await api.listPokemons(pageParam, 60); // You can adjust the parameters as needed
-    return response;
+    // You can adjust the parameters as needed
+    return await api.listPokemons(pageParam, 60);
   } catch (error) {
     throw new Error('Failed to fetch pokemons');
   }
@@ -23,8 +23,7 @@ export const getTypes = async () => {
 
 export const getPokemonByName = async (name: string) => {
   try {
-    const response = await api.getPokemonByName(name);
-    return response;
+    return await api.getPokemonByName(name);
   } catch (error) {
     throw new Error('Failed to fetch pokemon');
   }

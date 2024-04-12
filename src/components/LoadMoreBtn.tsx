@@ -14,7 +14,7 @@ const LoadMoreBtn = ({
   <>
     <div className='mt-4 text-center'>
       <button
-        onClick={() => fetchNextPage()}
+        onClick={fetchNextPage}
         disabled={!hasNextPage || isFetchingNextPage}
         className={`rounded-full px-6 py-2 text-lg font-semibold ${
           !hasNextPage || isFetchingNextPage
