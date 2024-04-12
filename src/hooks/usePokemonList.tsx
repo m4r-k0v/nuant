@@ -33,12 +33,14 @@ export const usePokemonList = ({
 
   const prepareDataForCardWrapper = () => {
     if (debouncedSearchTerm) {
-      return [
-        {
-          name: pokemonByName?.name,
-          url: pokemonByName?.species.url,
-        },
-      ];
+      return pokemonByName
+        ? [
+            {
+              name: pokemonByName?.name,
+              url: pokemonByName?.species.url,
+            },
+          ]
+        : [];
     }
 
     if (selectedType) {

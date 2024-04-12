@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Layout from 'components/Layout';
 import Title from 'components/Title';
 import { useGetDynamicData } from 'hooks/query/useGetDynamicData';
@@ -10,6 +10,8 @@ import Pill from 'components/Pokemon/Pill';
 import Section from 'components/Pokemon/Section';
 
 const PokemonDetails = () => {
+  const navigate = useNavigate();
+
   const { pokemonName } = useParams<{ pokemonName: string }>();
   const { pokemonByName, isLoadingPokemonByName } = useGetPokemonByName(
     pokemonName ?? ''
@@ -37,7 +39,7 @@ const PokemonDetails = () => {
   return (
     <Layout>
       <Title title='Pokédex' />
-      <Link to={'/'}>Back to List</Link>
+      <button onClick={() => navigate(-1)}>Back</button>
       <div>
         {isLoadingPokemonByName ? (
           <Loader />

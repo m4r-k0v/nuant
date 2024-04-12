@@ -10,6 +10,7 @@ export const useGetPokemonTypes = () => {
     enabled: true,
     queryKey: ['pokemon-types'],
     queryFn: getTypes,
+    select: (data) => data.map(({ name }) => ({ name, value: name })),
   });
 
   return {
