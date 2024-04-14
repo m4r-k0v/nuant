@@ -1,4 +1,4 @@
-# Nuant FE Test
+# Pokédex
 
 Project uses vite react-ts template which provides a minimal setup to get React working in Vite with ESLint rules.
 
