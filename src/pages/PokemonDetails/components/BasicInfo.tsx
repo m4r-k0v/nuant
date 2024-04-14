@@ -17,10 +17,10 @@ const BasicInfo = ({
   return (
     <Section title='Basic Information'>
       <div className='flex flex-col items-center justify-around md:flex-row md:items-start'>
-        <p className='mt-4 text-center md:mt-0 md:w-1/3 md:text-left'>
+        <div className='mt-4 text-center md:mt-0 md:w-1/3 md:text-left'>
           <ProfileImage pokemon={pokemonByName} />
           {!isLoading && speciesInfo?.flavor_text_entries[0].flavor_text}
-        </p>
+        </div>
         <div className='mt-4 w-full rounded-2xl p-4 shadow-lg md:mt-0 md:w-1/3'>
           <StatItem title='Name' description={pokemonByName?.name} />
           <StatItem

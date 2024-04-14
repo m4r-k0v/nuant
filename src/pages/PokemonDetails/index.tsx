@@ -23,8 +23,8 @@ const PokemonDetails = () => {
 
   const mappedTypes = pokemonByName?.types.map(({ type }) => {
     return (
-      <Link to={`/?type=${type?.name}`}>
-        <Pill key={type.name} type={type?.name} children={type?.name} />
+      <Link key={type.name} to={`/?type=${type?.name}`}>
+        <Pill type={type?.name} children={type?.name} />
       </Link>
     );
   });
@@ -46,7 +46,7 @@ const PokemonDetails = () => {
           <Loader />
         ) : (
           pokemonByName && (
-            <div>
+            <>
               <BasicInfo
                 speciesInfo={speciesInfo}
                 pokemonByName={pokemonByName}
@@ -54,7 +54,7 @@ const PokemonDetails = () => {
               />
               <Section title='Types'>{mappedTypes}</Section>
               <Section title='BasicInfo'>{mappedStats}</Section>
-            </div>
+            </>
           )
         )}
       </div>
